@@ -9,11 +9,6 @@ case "$ARCH" in # they use AMD64 and ARM64 for the deb links
 esac
 DEB_LINK=$(wget https://api.github.com/repos/FreeTubeApp/FreeTube/releases -O - \
       | sed 's/[()",{} ]/\n/g' | grep -o -m 1 "https.*$deb_arch.deb")
-#DEB_LINK=$(wget https://api.github.com/repos/FreeTubeApp/FreeTube/releases -O - \
-#      | sed 's/[()",{} ]/\n/g' \
-#      | sed 's/\/v/\//' \
-#      | grep -o -m 1 "https.*$deb_arch.deb")
-#echo "$DEB_LINK" | awk -F'/' '{print $(NF-1); exit}' > ~/version
 echo "$DEB_LINK" | awk -F'/' '{gsub(/^v/, "", $(NF-1)); print $(NF-1); exit}' > ~/version
 
 echo "Installing package dependencies..."
@@ -47,9 +42,6 @@ if ! wget --retry-connrefused --tries=30 "$DEB_LINK" -O /tmp/app.deb 2>/tmp/down
 	cat /tmp/download.log
 	exit 1
 fi
-
-#VERSION="$(git ls-remote --tags --sort="v:refname" https://github.com/FreeTubeApp/FreeTube | tail -n1 | sed 's/.*\///; s/\^{}//; s/^v//')"
-#echo "$VERSION" > ~/version
 
 ar xvf /tmp/app.deb
 tar -xvf ./data.tar.xz
