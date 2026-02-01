@@ -14,9 +14,9 @@ echo "$DEB_LINK" | awk -F'/' '{gsub(/^v/, "", $(NF-1)); print $(NF-1); exit}' > 
 echo "Installing package dependencies..."
 echo "---------------------------------------------------------------"
 pacman -Syu --noconfirm \
-	nss           \
-	nspr		  \
-	pipewire	  \
+	nss            \
+	nspr		   \
+	pipewire-audio \
 	pipewire-jack
 
 echo "Installing debloated packages..."
