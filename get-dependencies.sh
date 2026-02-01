@@ -44,7 +44,7 @@ rm -f ./*.xz
 rm -rf ./usr/share/doc
 mv -v ./usr ./AppDir
 mv -v ./opt ./AppDir/lib
-mkdir ./AppDir/bin
+mkdir -p ./AppDir/bin
 ln -s ./AppDir/lib/Freetube/freetube ./AppDir/bin/freetube
 cp -v ./AppDir/share/applications/freetube.desktop            ./AppDir
 cp -v ./AppDir/share/icons/hicolor/scalable/apps/freetube.svg  ./AppDir/.DirIcon
