@@ -3,7 +3,11 @@
 set -eu
 
 ARCH=$(uname -m)
-DEB_LINK="https://github.com/FreeTubeApp/FreeTube/releases/download/v0.23.13-beta/freetube_0.23.13_beta_$ARCH.deb"
+if [ "$ARCH" = 'x86_64' ]; then
+DEB_LINK="https://github.com/FreeTubeApp/FreeTube/releases/download/v0.23.13-beta/freetube_0.23.13_beta_amd64.deb"
+else
+DEB_LINK="https://github.com/FreeTubeApp/FreeTube/releases/download/v0.23.13-beta/freetube_0.23.13_beta_arm64.deb"
+fi
 
 echo "Installing package dependencies..."
 echo "---------------------------------------------------------------"
