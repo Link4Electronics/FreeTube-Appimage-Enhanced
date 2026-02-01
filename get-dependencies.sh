@@ -3,11 +3,11 @@
 set -eu
 
 ARCH=$(uname -m)
-if [ "$ARCH" = 'x86_64' ]; then
-DEB_LINK="https://github.com/FreeTubeApp/FreeTube/releases/download/v0.23.13-beta/freetube_0.23.13_beta_amd64.deb"
-else
-DEB_LINK="https://github.com/FreeTubeApp/FreeTube/releases/download/v0.23.13-beta/freetube_0.23.13_beta_arm64.deb"
-fi
+case "$ARCH" in # they use AMD64 and ARM64 for the deb links
+	x86_64)  deb_arch=amd64;;
+	aarch64) deb_arch=arm64;;
+esac
+DEB_LINK="https://github.com/FreeTubeApp/FreeTube/releases/download/v0.23.13-beta/freetube_0.23.13_beta_$deb_arch.deb"
 
 echo "Installing package dependencies..."
 echo "---------------------------------------------------------------"
@@ -43,9 +43,10 @@ tar -xvf ./data.tar.xz
 rm -f ./*.xz
 rm -rf ./usr/share/doc
 mv -v ./usr ./AppDir
-mv -v ./opt ./AppDir/lib
-mkdir -p ./AppDir/bin
-ln -s ./AppDir/lib/Freetube/freetube ./AppDir/bin/freetube
+mv -v ./opt/Freetube ./AppDir/bin
+#mv -v ./opt ./AppDir/lib
+#mkdir -p ./AppDir/bin
+#ln -s ./AppDir/lib/Freetube/freetube ./AppDir/bin/freetube
 cp -v ./AppDir/share/applications/freetube.desktop            ./AppDir
 cp -v ./AppDir/share/icons/hicolor/scalable/apps/freetube.svg  ./AppDir/.DirIcon
 cp -v ./AppDir/share/icons/hicolor/scalable/apps/freetube.svg  ./AppDir
