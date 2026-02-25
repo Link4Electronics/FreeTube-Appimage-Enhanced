@@ -39,8 +39,7 @@ ar xvf /tmp/app.deb
 tar -xvf ./data.tar.xz
 rm -f ./*.xz
 rm -rf ./usr/share/doc
-mv -v ./usr ./AppDir
-mv -v ./opt/FreeTube ./AppDir/bin
-cp -v ./AppDir/share/applications/freetube.desktop            ./AppDir
-cp -v ./AppDir/share/icons/hicolor/scalable/apps/freetube.svg  ./AppDir/.DirIcon
-cp -v ./AppDir/share/icons/hicolor/scalable/apps/freetube.svg  ./AppDir
+mv -v ./opt/FreeTube/* ./AppDir/bin
+mv -v ./usr/share/applications/freetube.desktop ./AppDir
+mv -v ./usr/share/icons/hicolor/scalable/apps/freetube.svg ./AppDir/.DirIcon
+mv -v ./usr/share/icons/hicolor/scalable/apps/freetube.svg ./AppDir
