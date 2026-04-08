@@ -7,8 +7,6 @@ ARCH=$(uname -m)
 echo "Installing package dependencies..."
 echo "---------------------------------------------------------------"
 pacman -Syu --noconfirm \
-	nss            \
-	nspr		   \
 	pipewire-audio \
 	pipewire-jack
 
